@@ -3,6 +3,7 @@ import { prettier } from "./prettier"
 
 import { parseArgs } from "node:util"
 import { run } from "./util"
+import { eslint } from "./eslint"
 
 export type Config = {
   files: {
@@ -45,8 +46,10 @@ const config: Config = {
 
 if (args.positionals.length > 0) {
   if (args.positionals.includes("prettier")) await prettier(config)
+  if (args.positionals.includes("eslint")) await eslint(config)
 } else {
   await prettier(config)
+  await eslint(config)
 }
 
 if (args.values.dry) {

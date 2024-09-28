@@ -3,14 +3,14 @@ import type { Config } from "."
 
 import { join } from "node:path"
 
-const PRETTIER_CONFIG = join(import.meta.dir, "../configs/prettier.json")
+const CONFIG_FILE = join(import.meta.dir, "../configs/prettier.json")
 
 export const prettier = async (config: Config) => {
-  const prettierConfig = await readFile(PRETTIER_CONFIG, "utf8")
+  const contents = await readFile(CONFIG_FILE, "utf8")
 
   config.files.push({
     name: ".prettierrc.json",
-    contents: prettierConfig,
+    contents,
   })
 
   config.packages.dev.push("prettier")
