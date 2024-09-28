@@ -1,13 +1,16 @@
 {
   "name": "respray",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vaaski/respray"
+  },
+  "author": {
+    "name": "vaaski",
+    "email": "admin@vaa.ski",
+    "url": "https://vaa.ski"
+  },
+  "type": "module",
   "module": "src/index.ts",
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "20"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
   "bin": "dist/index.js",
   "files": [
     "dist",
@@ -16,5 +19,11 @@
   "scripts": {
     "build": "bun run scripts/build.ts"
   },
-  "type": "module"
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "20"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
