@@ -1,18 +1,20 @@
 {
   "name": "respray",
   "module": "src/index.ts",
-  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "20"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "bin": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "configs"
   ],
   "scripts": {
     "build": "bun run scripts/build.ts"
   },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "type": "module"
 }
