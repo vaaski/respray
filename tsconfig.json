@@ -1,7 +1,9 @@
 {
+  "include": ["src/**/*"],
   "compilerOptions": {
     // Enable latest features
     "lib": ["ESNext", "DOM"],
+    "types": ["@types/bun", "@types/node"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
