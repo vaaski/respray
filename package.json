@@ -1,5 +1,5 @@
 {
-  "name": "smell",
+  "name": "respray",
   "module": "src/index.ts",
   "type": "module",
   "bin": "dist/index.js",

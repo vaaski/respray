@@ -1,4 +1,4 @@
-# smell
+# respray
 
 To install dependencies:
 
