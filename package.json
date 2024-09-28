@@ -17,7 +17,8 @@
     "configs"
   ],
   "scripts": {
-    "build": "bun run scripts/build.ts"
+    "build": "bun run scripts/build.ts",
+    "prepublishOnly": "bun run scripts/build.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
