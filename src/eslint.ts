@@ -9,7 +9,7 @@ export const eslint = async (config: Config) => {
   const contents = await readFile(CONFIG_FILE, "utf8")
 
   config.files.push({
-    name: "eslint.config.js",
+    name: "eslint.config.mjs",
     contents,
   })
 

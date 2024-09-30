@@ -4,23 +4,10 @@ import { prettier } from "./prettier"
 import { parseArgs } from "node:util"
 import { run } from "./util"
 import { eslint } from "./eslint"
+import { eslintNuxt, isNuxt } from "./nuxt"
 
-export type Config = {
-  files: {
-    name: string
-    contents: string
-  }[]
-
-  scripts: {
-    name: string
-    command: string
-  }[]
-
-  packages: {
-    save: string[]
-    dev: string[]
-  }
-}
+// todo make commits for each step
+// todo format committed files
 
 const args = parseArgs({
   allowPositionals: true,
@@ -35,6 +22,28 @@ const args = parseArgs({
   },
 })
 
+export type ConfigExecutor = () => Promise<void>
+export type ConfigFile = {
+  name: string
+  contents: string
+}
+
+export type Config = {
+  files: (ConfigExecutor | ConfigFile)[]
+
+  scripts: {
+    name: string
+    command: string
+  }[]
+
+  packages: {
+    save: string[]
+    dev: string[]
+  }
+
+  postHooks: ConfigExecutor[]
+}
+
 const config: Config = {
   files: [],
   scripts: [],
@@ -42,14 +51,25 @@ const config: Config = {
     save: [],
     dev: [],
   },
+  postHooks: [],
 }
 
-if (args.positionals.length > 0) {
-  if (args.positionals.includes("prettier")) await prettier(config)
-  if (args.positionals.includes("eslint")) await eslint(config)
+if (await isNuxt()) {
+  if (args.positionals.length > 0) {
+    // if (args.positionals.includes("prettier")) await prettier(config)
+    if (args.positionals.includes("eslint")) await eslintNuxt(config)
+  } else {
+    // await prettier(config)
+    await eslintNuxt(config)
+  }
 } else {
-  await prettier(config)
-  await eslint(config)
+  if (args.positionals.length > 0) {
+    if (args.positionals.includes("prettier")) await prettier(config)
+    if (args.positionals.includes("eslint")) await eslint(config)
+  } else {
+    await prettier(config)
+    await eslint(config)
+  }
 }
 
 if (args.values.dry) {

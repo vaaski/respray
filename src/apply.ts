@@ -33,7 +33,17 @@ export const addScripts = async (scripts: Config["scripts"]) => {
 
 export const addConfigFiles = async (files: Config["files"]) => {
   for (const file of files) {
-    await writeFile(file.name, file.contents)
+    if (typeof file === "function") {
+      await file()
+    } else {
+      await writeFile(file.name, file.contents)
+    }
+  }
+}
+
+export const runPostHooks = async (hooks: Config["postHooks"]) => {
+  for (const hook of hooks) {
+    await hook()
   }
 }
 
@@ -41,4 +51,5 @@ export const apply = async (config: Config) => {
   await installPackages(config.packages)
   await addScripts(config.scripts)
   await addConfigFiles(config.files)
+  await runPostHooks(config.postHooks)
 }
