@@ -4,7 +4,6 @@ import { prettier } from "./prettier"
 import { parseArgs } from "node:util"
 import { run } from "./util"
 import { eslint } from "./eslint"
-import { eslintNuxt, isNuxt } from "./nuxt"
 
 // todo make commits for each step
 // todo format committed files
@@ -54,22 +53,12 @@ const config: Config = {
   postHooks: [],
 }
 
-if (await isNuxt()) {
-  if (args.positionals.length > 0) {
-    if (args.positionals.includes("prettier")) await prettier(config)
-    if (args.positionals.includes("eslint")) await eslintNuxt(config)
-  } else {
-    await prettier(config)
-    await eslintNuxt(config)
-  }
+if (args.positionals.length > 0) {
+  if (args.positionals.includes("prettier")) await prettier(config)
+  if (args.positionals.includes("eslint")) await eslint(config)
 } else {
-  if (args.positionals.length > 0) {
-    if (args.positionals.includes("prettier")) await prettier(config)
-    if (args.positionals.includes("eslint")) await eslint(config)
-  } else {
-    await prettier(config)
-    await eslint(config)
-  }
+  await prettier(config)
+  await eslint(config)
 }
 
 if (args.values.dry) {
