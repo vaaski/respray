@@ -56,10 +56,10 @@ const config: Config = {
 
 if (await isNuxt()) {
   if (args.positionals.length > 0) {
-    // if (args.positionals.includes("prettier")) await prettier(config)
+    if (args.positionals.includes("prettier")) await prettier(config)
     if (args.positionals.includes("eslint")) await eslintNuxt(config)
   } else {
-    // await prettier(config)
+    await prettier(config)
     await eslintNuxt(config)
   }
 } else {
