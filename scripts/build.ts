@@ -18,9 +18,9 @@ const esbuildConfig: esbuild.BuildOptions = {
   platform: "node",
   minify: true,
 
-  banner: {
-    js: "#!/usr/bin/env node",
-  },
+  // banner: {
+  //   js: "#!/usr/bin/env node",
+  // },
 }
 
 if (args.values.dev) {
@@ -31,5 +31,4 @@ if (args.values.dev) {
   await ctx.watch()
 } else {
   await esbuild.build(esbuildConfig)
-  console.log(`built ${esbuildConfig.outfile}`)
 }
