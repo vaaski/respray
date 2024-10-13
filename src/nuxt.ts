@@ -31,9 +31,6 @@ export const eslintNuxt = async (config: Config) => {
   config.packages.dev.push("@nuxt/eslint", "eslint-plugin-unicorn")
 
   config.files.push(overwriteNuxtConfig)
-  config.postHooks.push(async () => {
-    // todo: format nuxt config if formatter available
-  })
 
   config.scripts.push({
     name: "lint",

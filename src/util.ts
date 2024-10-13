@@ -20,5 +20,8 @@ export const args = parseArgs({
     "no-commit": {
       type: "boolean",
     },
+    "no-format": {
+      type: "boolean",
+    },
   },
 })

@@ -4,9 +4,6 @@ import { eslint } from "./eslint"
 import { args, run } from "./util"
 import { commit } from "./git"
 
-// todo make commits for each step
-// todo format committed files
-
 export type ConfigExecutor = () => Promise<void>
 export type ConfigFile = {
   name: string
@@ -26,6 +23,7 @@ export type Config = {
     dev: string[]
   }
 
+  /** run stuff after all other steps, after the initial "respray" commit */
   postHooks: ConfigExecutor[]
 }
 
@@ -53,7 +51,6 @@ if (args.values.dry) {
   await installPackages(config.packages)
   await addConfigFiles(config.files)
   await addScripts(config.scripts)
-  await runPostHooks(config.postHooks)
 
   if (!args.values["no-sort"]) {
     try {
@@ -63,4 +60,6 @@ if (args.values.dry) {
   }
 
   await commit("respray")
+
+  await runPostHooks(config.postHooks)
 }
