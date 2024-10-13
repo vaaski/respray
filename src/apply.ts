@@ -46,10 +46,3 @@ export const runPostHooks = async (hooks: Config["postHooks"]) => {
     await hook()
   }
 }
-
-export const apply = async (config: Config) => {
-  await addConfigFiles(config.files)
-  await installPackages(config.packages)
-  await addScripts(config.scripts)
-  await runPostHooks(config.postHooks)
-}

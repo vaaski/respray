@@ -1,9 +1,9 @@
-import { apply } from "./apply"
-import { prettier } from "./prettier"
-
 import { parseArgs } from "node:util"
-import { run } from "./util"
+
+import { addConfigFiles, addScripts, installPackages, runPostHooks } from "./apply"
+import { prettier } from "./prettier"
 import { eslint } from "./eslint"
+import { run } from "./util"
 
 // todo make commits for each step
 // todo format committed files
@@ -64,7 +64,10 @@ if (args.positionals.length > 0) {
 if (args.values.dry) {
   console.log(config)
 } else {
-  await apply(config)
+  await installPackages(config.packages)
+  await addConfigFiles(config.files)
+  await addScripts(config.scripts)
+  await runPostHooks(config.postHooks)
 
   if (!args.values["no-sort"]) {
     try {
