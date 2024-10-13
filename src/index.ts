@@ -1,25 +1,11 @@
-import { parseArgs } from "node:util"
-
 import { addConfigFiles, addScripts, installPackages, runPostHooks } from "./apply"
 import { prettier } from "./prettier"
 import { eslint } from "./eslint"
-import { run } from "./util"
+import { args, run } from "./util"
+import { commit } from "./git"
 
 // todo make commits for each step
 // todo format committed files
-
-const args = parseArgs({
-  allowPositionals: true,
-  options: {
-    dry: {
-      type: "boolean",
-      short: "d",
-    },
-    "no-sort": {
-      type: "boolean",
-    },
-  },
-})
 
 export type ConfigExecutor = () => Promise<void>
 export type ConfigFile = {
@@ -75,4 +61,6 @@ if (args.values.dry) {
       await run(["bun", "x", "sort-package-json"])
     } catch {}
   }
+
+  await commit("respray")
 }
