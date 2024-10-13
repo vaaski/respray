@@ -23,5 +23,15 @@ export const args = parseArgs({
     "no-format": {
       type: "boolean",
     },
+    prime: {
+      type: "boolean",
+      short: "P",
+    },
   },
 })
+
+if (args.values.prime) {
+  args.values["no-sort"] = true
+  args.values["no-commit"] = true
+  args.values["no-format"] = true
+}
