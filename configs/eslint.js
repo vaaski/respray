@@ -1,12 +1,12 @@
 import globals from "globals"
 import pluginJs from "@eslint/js"
-import tseslint from "typescript-eslint"
+import tsEslint from "typescript-eslint"
 import unicorn from "eslint-plugin-unicorn"
 
-export default [
+export default tsEslint.config(
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tsEslint.configs.recommended,
   unicorn.configs["flat/recommended"],
-]
+)
