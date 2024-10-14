@@ -9,4 +9,9 @@ export default tsEslint.config(
 	pluginJs.configs.recommended,
 	...tsEslint.configs.recommended,
 	unicorn.configs["flat/recommended"],
+	{
+		rules: {
+			"unicorn/prefer-ternary": "off",
+		},
+	},
 )
