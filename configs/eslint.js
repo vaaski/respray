@@ -4,9 +4,9 @@ import tsEslint from "typescript-eslint"
 import unicorn from "eslint-plugin-unicorn"
 
 export default tsEslint.config(
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  ...tsEslint.configs.recommended,
-  unicorn.configs["flat/recommended"],
+	{ files: ["**/*.{js,mjs,cjs,ts}"] },
+	{ languageOptions: { globals: globals.browser } },
+	pluginJs.configs.recommended,
+	...tsEslint.configs.recommended,
+	unicorn.configs["flat/recommended"],
 )

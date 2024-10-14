@@ -1,41 +1,41 @@
 {
-  "name": "respray",
-  "version": "0.2.0",
-  "description": "Initializer for formatters and linters with opinionated defaults to give your project a fresh coat of paint.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vaaski/respray"
-  },
-  "author": {
-    "name": "vaaski",
-    "email": "admin@vaa.ski",
-    "url": "https://vaa.ski"
-  },
-  "type": "module",
-  "module": "src/index.ts",
-  "bin": "dist/index.js",
-  "files": [
-    "dist",
-    "configs"
-  ],
-  "scripts": {
-    "build": "bun run scripts/build.ts",
-    "format": "prettier -w .",
-    "lint": "eslint .",
-    "prepublishOnly": "bun run scripts/build.ts"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.12.0",
-    "@types/bun": "latest",
-    "@types/node": "20",
-    "esbuild": "^0.24.0",
-    "eslint": "^9.12.0",
-    "eslint-plugin-unicorn": "^56.0.0",
-    "globals": "^15.11.0",
-    "prettier": "^3.3.3",
-    "typescript-eslint": "^8.8.1"
-  },
-  "peerDependencies": {
-    "typescript": "^5.6.2"
-  }
+	"name": "respray",
+	"version": "0.2.0",
+	"description": "Initializer for formatters and linters with opinionated defaults to give your project a fresh coat of paint.",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vaaski/respray"
+	},
+	"author": {
+		"name": "vaaski",
+		"email": "admin@vaa.ski",
+		"url": "https://vaa.ski"
+	},
+	"type": "module",
+	"module": "src/index.ts",
+	"bin": "dist/index.js",
+	"files": [
+		"dist",
+		"configs"
+	],
+	"scripts": {
+		"build": "bun run scripts/build.ts",
+		"format": "prettier -w .",
+		"lint": "eslint .",
+		"prepublishOnly": "bun run scripts/build.ts"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.12.0",
+		"@types/bun": "latest",
+		"@types/node": "20",
+		"esbuild": "^0.24.0",
+		"eslint": "^9.12.0",
+		"eslint-plugin-unicorn": "^56.0.0",
+		"globals": "^15.11.0",
+		"prettier": "^3.3.3",
+		"typescript-eslint": "^8.8.1"
+	},
+	"peerDependencies": {
+		"typescript": "^5.6.2"
+	}
 }

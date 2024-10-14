@@ -6,67 +6,67 @@ import { commit, gitWorktreeDirty } from "./git"
 
 export type ConfigExecutor = () => Promise<void>
 export type ConfigFile = {
-  name: string
-  contents: string
+	name: string
+	contents: string
 }
 
 export type Config = {
-  files: (ConfigExecutor | ConfigFile)[]
+	files: (ConfigExecutor | ConfigFile)[]
 
-  scripts: {
-    name: string
-    command: string
-  }[]
+	scripts: {
+		name: string
+		command: string
+	}[]
 
-  packages: {
-    save: string[]
-    dev: string[]
-  }
+	packages: {
+		save: string[]
+		dev: string[]
+	}
 
-  /** run stuff after all other steps, after the initial "respray" commit */
-  postHooks: ConfigExecutor[]
+	/** run stuff after all other steps, after the initial "respray" commit */
+	postHooks: ConfigExecutor[]
 }
 
 const config: Config = {
-  files: [],
-  scripts: [],
-  packages: {
-    save: [],
-    dev: [],
-  },
-  postHooks: [],
+	files: [],
+	scripts: [],
+	packages: {
+		save: [],
+		dev: [],
+	},
+	postHooks: [],
 }
 
 if (gitWorktreeDirty) {
-  console.log(
-    "Worktree dirty. Please stash or commit your work or pass --no-commit to continue.",
-  )
-  process.exit(1)
+	console.log(
+		"Worktree dirty. Please stash or commit your work or pass --no-commit to continue.",
+	)
+	process.exit(1)
 }
 
 if (args.positionals.length > 0) {
-  if (args.positionals.includes("prettier")) await prettier(config)
-  if (args.positionals.includes("eslint")) await eslint(config)
+	if (args.positionals.includes("prettier")) await prettier(config)
+	if (args.positionals.includes("eslint")) await eslint(config)
 } else {
-  await prettier(config)
-  await eslint(config)
+	await prettier(config)
+	await eslint(config)
 }
 
 if (args.values.dry) {
-  console.log(config)
+	console.log(config)
 } else {
-  await installPackages(config.packages)
-  await addConfigFiles(config.files)
-  await addScripts(config.scripts)
+	await installPackages(config.packages)
+	await addConfigFiles(config.files)
+	await addScripts(config.scripts)
 
-  if (!args.values["no-sort"]) {
-    try {
-      // todo: make this better
-      await run(["bun", "x", "sort-package-json"])
-    } catch {}
-  }
+	if (!args.values["no-sort"]) {
+		try {
+			// todo: make this better
+			await run(["bun", "x", "sort-package-json"])
+		} catch {}
+	}
 
-  await commit("respray")
+	await commit("respray")
 
-  await runPostHooks(config.postHooks)
+	await runPostHooks(config.postHooks)
 }
