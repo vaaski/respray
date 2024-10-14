@@ -18,9 +18,9 @@ const esbuildConfig: esbuild.BuildOptions = {
   platform: "node",
   minify: true,
 
-  // banner: {
-  //   js: "#!/usr/bin/env node",
-  // },
+  banner: {
+    js: "#!/usr/bin/env bun",
+  },
 }
 
 if (args.values.dev) {
