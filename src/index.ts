@@ -2,7 +2,7 @@ import { addConfigFiles, addScripts, installPackages, runPostHooks } from "./app
 import { prettier } from "./prettier"
 import { eslint } from "./eslint"
 import { args, run } from "./util"
-import { commit } from "./git"
+import { commit, gitWorktreeDirty } from "./git"
 
 export type ConfigExecutor = () => Promise<void>
 export type ConfigFile = {
@@ -35,6 +35,13 @@ const config: Config = {
     dev: [],
   },
   postHooks: [],
+}
+
+if (gitWorktreeDirty) {
+  console.log(
+    "Worktree dirty. Please stash or commit your work or pass --no-commit to continue.",
+  )
+  process.exit(1)
 }
 
 if (args.positionals.length > 0) {
