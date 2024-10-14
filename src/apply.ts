@@ -27,7 +27,7 @@ export const addScripts = async (scripts: Config["scripts"]) => {
 		copy.scripts[script.name] = script.command
 	}
 
-	const stringified = JSON.stringify(copy, null, 2)
+	const stringified = JSON.stringify(copy, undefined, 2)
 	await writeFile("package.json", stringified)
 }
 

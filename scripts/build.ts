@@ -1,7 +1,7 @@
 import esbuild from "esbuild"
 import { parseArgs } from "node:util"
 
-const args = parseArgs({
+const parameters = parseArgs({
 	options: {
 		dev: {
 			type: "boolean",
@@ -23,12 +23,12 @@ const esbuildConfig: esbuild.BuildOptions = {
 	},
 }
 
-if (args.values.dev) {
-	const ctx = await esbuild.context(esbuildConfig)
+if (parameters.values.dev) {
+	const context = await esbuild.context(esbuildConfig)
 
 	console.log("watching...")
 
-	await ctx.watch()
+	await context.watch()
 } else {
 	await esbuild.build(esbuildConfig)
 }

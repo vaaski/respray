@@ -1,7 +1,7 @@
 import { addConfigFiles, addScripts, installPackages, runPostHooks } from "./apply"
 import { prettier } from "./prettier"
 import { eslint } from "./eslint"
-import { args, run } from "./util"
+import { parameters, run } from "./util"
 import { commit, gitWorktreeDirty } from "./git"
 
 export type ConfigExecutor = () => Promise<void>
@@ -44,26 +44,28 @@ if (gitWorktreeDirty) {
 	process.exit(1)
 }
 
-if (args.positionals.length > 0) {
-	if (args.positionals.includes("prettier")) await prettier(config)
-	if (args.positionals.includes("eslint")) await eslint(config)
+if (parameters.positionals.length > 0) {
+	if (parameters.positionals.includes("prettier")) await prettier(config)
+	if (parameters.positionals.includes("eslint")) await eslint(config)
 } else {
 	await prettier(config)
 	await eslint(config)
 }
 
-if (args.values.dry) {
+if (parameters.values.dry) {
 	console.log(config)
 } else {
 	await installPackages(config.packages)
 	await addConfigFiles(config.files)
 	await addScripts(config.scripts)
 
-	if (!args.values["no-sort"]) {
+	if (!parameters.values["no-sort"]) {
 		try {
 			// todo: make this better
 			await run(["bun", "x", "sort-package-json"])
-		} catch {}
+		} catch {
+			// ignore
+		}
 	}
 
 	await commit("respray")

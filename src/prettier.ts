@@ -3,7 +3,7 @@ import type { Config } from "."
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 
-import { args, run } from "./util"
+import { parameters, run } from "./util"
 import { commit } from "./git"
 
 const CONFIG_FILE = join(import.meta.dir, "../configs/prettier.json")
@@ -24,7 +24,7 @@ export const prettier = async (config: Config) => {
 	})
 
 	config.postHooks.push(async () => {
-		if (args.values["no-format"]) return
+		if (parameters.values["no-format"]) return
 
 		await run(["bun", "run", "format"])
 		await commit("format")

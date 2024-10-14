@@ -1,6 +1,6 @@
 import { parseArgs } from "node:util"
 
-export const args = parseArgs({
+export const parameters = parseArgs({
 	allowPositionals: true,
 	options: {
 		dry: {
@@ -23,10 +23,10 @@ export const args = parseArgs({
 	},
 })
 
-if (args.values.prime) {
-	args.values["no-sort"] = true
-	args.values["no-commit"] = true
-	args.values["no-format"] = true
+if (parameters.values.prime) {
+	parameters.values["no-sort"] = true
+	parameters.values["no-commit"] = true
+	parameters.values["no-format"] = true
 }
 
 export const run = async (command: Parameters<typeof Bun.spawn>[0]) => {

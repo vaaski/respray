@@ -25,17 +25,19 @@ export const addModulesToNuxtConfig = (sourceCode: string, newModules: string[])
 				const updatedProperties = [...configObject.properties]
 
 				const modulesProperty = configObject.properties.find(
-					(prop): prop is ts.PropertyAssignment => {
-						return ts.isPropertyAssignment(prop) && prop.name.getText() === "modules"
+					(property): property is ts.PropertyAssignment => {
+						return (
+							ts.isPropertyAssignment(property) && property.name.getText() === "modules"
+						)
 					},
 				)
 
 				if (modulesProperty) {
 					if (!ts.isArrayLiteralExpression(modulesProperty.initializer)) break matches
 
-					const existingModules = modulesProperty.initializer.elements.map((el) => {
-						if (!ts.isStringLiteral(el)) throw new Error(`Invalid module ${el}`)
-						return el.text
+					const existingModules = modulesProperty.initializer.elements.map((element) => {
+						if (!ts.isStringLiteral(element)) throw new Error(`Invalid module ${element}`)
+						return element.text
 					})
 
 					const updatedModules = [...new Set([...existingModules, ...newModules])]

@@ -1,8 +1,9 @@
 import type { Config } from "."
 
 import { readFile, stat, writeFile } from "node:fs/promises"
-import { addModulesToNuxtConfig } from "./transformers/nuxt-conf"
-import { join } from "node:path"
+import path from "node:path"
+
+import { addModulesToNuxtConfig } from "./transformers/nuxt-config"
 
 export const isNuxt = async () => {
 	try {
@@ -19,7 +20,7 @@ export const overwriteNuxtConfig = async () => {
 	await writeFile("nuxt.config.ts", transformedNuxt)
 }
 
-const CONFIG_FILE = join(import.meta.dir, "../configs/eslint-nuxt.js")
+const CONFIG_FILE = path.join(import.meta.dir, "../configs/eslint-nuxt.js")
 export const eslintNuxt = async (config: Config) => {
 	const contents = await readFile(CONFIG_FILE, "utf8")
 

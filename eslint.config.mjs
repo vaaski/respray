@@ -9,4 +9,10 @@ export default tsEslint.config(
 	pluginJs.configs.recommended,
 	...tsEslint.configs.recommended,
 	unicorn.configs["flat/recommended"],
+	{
+		rules: {
+			"unicorn/no-process-exit": "off",
+			"unicorn/prefer-ternary": "off",
+		},
+	},
 )

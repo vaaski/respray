@@ -1,11 +1,11 @@
 import type { Config } from "."
 
 import { readFile } from "node:fs/promises"
+import path from "node:path"
+
 import { eslintNuxt, isNuxt } from "./nuxt"
 
-import { join } from "node:path"
-
-const CONFIG_FILE = join(import.meta.dir, "../configs/eslint.js")
+const CONFIG_FILE = path.join(import.meta.dir, "../configs/eslint.js")
 
 export const eslint = async (config: Config) => {
 	if (await isNuxt()) return await eslintNuxt(config)
