@@ -4,7 +4,7 @@ export const commit = async (message: string) => {
 	if (parameters.values["no-commit"]) return
 
 	await run(["git", "add", "."])
-	await run(["git", "commit", "-m", message])
+	await run(["git", "commit", "-m", `${message}\n\nhttps://github.com/vaaski/respray`])
 }
 
 export const gitWorktreeDirty = await (async () => {
