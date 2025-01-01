@@ -1,12 +1,12 @@
 import type { Config } from "."
 
 import { readFile } from "node:fs/promises"
-import { join } from "node:path"
+import path from "node:path"
 
 import { parameters, run } from "./util"
 import { commit } from "./git"
 
-const CONFIG_FILE = join(import.meta.dir, "../configs/prettier.json")
+const CONFIG_FILE = path.join(import.meta.dir, "../configs/prettier.json")
 
 export const prettier = async (config: Config) => {
 	const contents = await readFile(CONFIG_FILE, "utf8")
