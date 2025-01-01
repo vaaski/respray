@@ -1,6 +1,6 @@
 {
 	"name": "respray",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "Initializer for formatters and linters with opinionated defaults to give your project a fresh coat of paint.",
 	"repository": {
 		"type": "git",
